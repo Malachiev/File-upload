@@ -1,0 +1,164 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    color: black;
+
+    width: 400px;
+    height: auto;
+    background-color:rgb(255, 255, 255);
+    padding: 20px;
+}
+
+.h3 {
+    text-align: start;
+    margin: 0
+}
+
+.header_balance {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.header_balance_text {
+    margin: 0;
+    font-size: 12px;
+    text-decoration: underline;
+}
+
+.header_balance_container {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    margin: 0;
+}
+
+.header_balance_amount { 
+    font-size: 17px;
+    color: rgb(59, 139, 59);
+}
+
+.header_balance_wallet {
+    font-weight:bolder;
+    margin: 2px
+}
+
+.header_balance_erc {
+    display: flex;
+    justify-content: end;
+    font-size: 8px;
+    color: rgb(59, 139, 59);
+    margin: 0;
+    padding-right: 0;
+    width: 50px;
+}
+
+.header_wallet {
+    display: flex;
+    align-items: start;
+    margin: 0;
+    font-size: 12px;
+}
+
+.transactions_container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.transaction_container {
+    width: 100%;
+}
+
+
+.input {
+    background-color: rgb(255, 255, 255);
+    border-bottom: 5px solid black;
+    color: black;
+    height: 30px;
+    width: 100%;
+    border: solid 2px var(--content-light);
+    font-size: 18px;
+    line-height: 30px;
+    margin-bottom: 5px;
+    outline: none; 
+}
+
+.input_border {
+    border-bottom: 2px solid rgb(241, 234, 234);
+}
+  
+.input_border,.input_border {
+    border-bottom: 2px solid rgb(184, 173, 173);
+}
+
+.input::placeholder {
+    color: rgb(191, 181, 181);
+    opacity: 0.7;
+}
+
+.button_container {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.button {
+    outline: none;
+    background-color: white; 
+    color: black; 
+    border: none; 
+    padding: 10px 20px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 1px;
+}
+
+.button:focus {
+    outline: none; 
+}
+
+.button:hover { 
+    background-color: #f0f0f0; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+}
+
+.button:active { 
+    background-color: #e0e0e0; 
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    transform: translateY(1px);
+}
+  
+
+.button_remove {
+    color: red;
+}
+
+.button_clear {
+    color:rgb(210, 195, 195)
+}
+
+.button_add {
+    color: rgb(31, 31, 237);
+    text-align: end;
+}
+
+.wrapper_button_add {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+}
+
+.amount_and_currency_container {
+    display: flex;
+}
+
+.total_container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.total_amount {
+    display: flex;
+}
