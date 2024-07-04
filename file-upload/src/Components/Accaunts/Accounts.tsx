@@ -17,30 +17,52 @@ const Accounts: React.FC = () => {
         });
       };
 
-    // Не самое оптимальное решение
+    // Не самое оптимальное решение, нужно доработать
+    // Неккоректная работа при вводе "." после "0" 
+    // Пример ввода: "0." ===> Вывод: "0"
     const handleAmountChange = (index: number, value: string) => {
+        if (+value === 0) {
+          return         setFormData((prevFormData) => {
+            return prevFormData.map((row, i) =>
+              i === index ? { ...row, amount: 0} : row
+            );
+          });
+        }
+
         const lastSymbol = value[value.length - 1];
-        console.log(+value, value);
+
         if (
-            isNaN(+lastSymbol) && 
+            isNaN(+lastSymbol) &&
             ![",", "."].includes(lastSymbol) || 
-            (value.indexOf('.') !== value.length -1 && [",", "."].includes(lastSymbol))
+            (value.indexOf('.') !== value.length -1 && 
+            value.indexOf(',') !== value.length -1 && 
+            [",", "."].includes(lastSymbol))
          ) {
                 return null
         }
+
+        // Проверяем, есть ли в строке точка и последний символ запятая
+        if (value.includes('.') && value.endsWith(',')) {
+          return null;
+        }
+        // Проверяем, есть ли в строке запятая и последний символ точка
+        if (value.includes(',') && value.endsWith('.')) {
+          return null;
+        }
+        
         if (value.length === 2 && +value < 10 && +value > 0) {
             return         setFormData((prevFormData) => {
                 return prevFormData.map((row, i) =>
-                  i === index ? { ...row, amount:  +value} : row
+                  i === index ? { ...row, amount: value } : row
                 );
               });
         }
 
-        const correctValue = [",","."].includes(lastSymbol) ? value + "00" : value
-
+        const validValue = value.replace(",", ".");
+        
         setFormData((prevFormData) => {
             return prevFormData.map((row, i) =>
-              i === index ? { ...row, amount:  correctValue} : row
+              i === index ? { ...row, amount: validValue} : row
             );
           });
     };
