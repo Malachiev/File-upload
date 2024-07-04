@@ -6,8 +6,8 @@
 
 .button {
     outline: none;
-    background-color: #f0f0f0; 
-    color: rgb(177, 170, 170); 
+    background-color: #e5d7d7; 
+    color: rgb(207, 183, 183); 
     border: none; 
     padding: 10px 20px; 
     cursor: pointer; 
@@ -30,4 +30,13 @@
     transform: translateY(1px);
 }
 
-  
+.input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    z-index: -1;
+    overflow: hidden;
+    position: absolute;
+    font-size: 0px;
+    content-visibility: hidden;
+}

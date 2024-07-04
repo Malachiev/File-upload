@@ -48,21 +48,20 @@ const FileUploadButton: React.FC<FileUploadButtonProps> = ({ setFormData }) => {
 
   return (
     <div className={styles.button_container}>
-      { uploadedFile ?
+      <input
+        type="file"
+        id="uploadFile"
+        accept=".xlsx,.xls"
+        onChange={handleFileChange}
+        className={styles.input} 
+      />
       <label 
         htmlFor="uploadFile"
         className={styles.button}
         onClick={handleConvertToJson}
       >
           {buttonText}
-      </label> :  <input
-        type="file"
-        id="uploadFile"
-        accept=".xlsx,.xls"
-        onChange={handleFileChange}
-        className={styles.button} 
-      />
-      }
+      </label> 
     </div>
   );
 };
