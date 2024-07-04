@@ -9,62 +9,60 @@ const Accounts: React.FC = () => {
         { wallet: '', amount: 0, currency: 'USDT' },
       ]);
     
-      const handleWalletChange = (index: number, value: string) => {
-        setFormData((prevFormData) => {
+    const handleWalletChange = (index: number, value: string) => {
+      setFormData((prevFormData) => {
+        return prevFormData.map((row, i) =>
+          i === index ? { ...row, wallet: value } : row
+        );
+      });
+    };
+  
+    // Не самое оптимальное решение, нужно доработать
+    const handleAmountChange = (index: number, value: string) => {
+      if (+value === 0 && value !== '0.' && value !== '0,') {
+        return         setFormData((prevFormData) => {
           return prevFormData.map((row, i) =>
-            i === index ? { ...row, wallet: value } : row
+            i === index ? { ...row, amount: 0} : row
           );
         });
-      };
+      }
 
-    // Не самое оптимальное решение, нужно доработать
-    // Неккоректная работа при вводе "." после "0" 
-    // Пример ввода: "0." ===> Вывод: "0"
-    const handleAmountChange = (index: number, value: string) => {
-        if (+value === 0) {
-          return         setFormData((prevFormData) => {
+      const lastSymbol = value[value.length - 1];
+
+      if (
+          isNaN(+lastSymbol) &&
+          ![",", "."].includes(lastSymbol) || 
+          (value.indexOf('.') !== value.length -1 && 
+          value.indexOf(',') !== value.length -1 && 
+          [",", "."].includes(lastSymbol))
+        ) {
+          return null
+      }
+
+      // Проверяем, есть ли в строке точка и последний символ запятая
+      if (value.includes('.') && value.endsWith(',')) {
+        return null;
+      }
+      // Проверяем, есть ли в строке запятая и последний символ точка
+      if (value.includes(',') && value.endsWith('.')) {
+        return null;
+      }
+      
+      if (value.length === 2 && +value < 10 && +value > 0) {
+        return setFormData((prevFormData) => {
             return prevFormData.map((row, i) =>
-              i === index ? { ...row, amount: 0} : row
+              i === index ? { ...row, amount: value } : row
             );
-          });
-        }
+        });
+      }
 
-        const lastSymbol = value[value.length - 1];
+      const validValue = value.replace(",", ".");
 
-        if (
-            isNaN(+lastSymbol) &&
-            ![",", "."].includes(lastSymbol) || 
-            (value.indexOf('.') !== value.length -1 && 
-            value.indexOf(',') !== value.length -1 && 
-            [",", "."].includes(lastSymbol))
-         ) {
-                return null
-        }
-
-        // Проверяем, есть ли в строке точка и последний символ запятая
-        if (value.includes('.') && value.endsWith(',')) {
-          return null;
-        }
-        // Проверяем, есть ли в строке запятая и последний символ точка
-        if (value.includes(',') && value.endsWith('.')) {
-          return null;
-        }
-        
-        if (value.length === 2 && +value < 10 && +value > 0) {
-            return         setFormData((prevFormData) => {
-                return prevFormData.map((row, i) =>
-                  i === index ? { ...row, amount: value } : row
-                );
-              });
-        }
-
-        const validValue = value.replace(",", ".");
-        
-        setFormData((prevFormData) => {
-            return prevFormData.map((row, i) =>
-              i === index ? { ...row, amount: validValue} : row
-            );
-          });
+      setFormData((prevFormData) => {
+          return prevFormData.map((row, i) =>
+            i === index ? { ...row, amount: validValue} : row
+          );
+      });
     };
       
       const addRow = () => {
